@@ -99,7 +99,7 @@ void smallLeatherGlove() {
 //This acquires a mushroom and hands it in
 void getAMushroom(string page) {
 	print("Getting a mushroom and giving it to the mayor", "blue");
-	foreach string in $strings["frozen","flaming","stinky"] {
+	foreach string in $strings[frozen,flaming,stinky] {
 		if (contains_text(page, string)) {
 			zapruderShroom = string;
 		}
@@ -121,7 +121,7 @@ void getAMushroom(string page) {
 //This clears the barrow
 void clearBarrow() {
 	print("Starting the Spooky gravy barrow","blue");
-	foreach string in $strings["spooky", "sleazy","frozen","flaming","stinky"] {
+	foreach string in $strings[spooky, sleazy,frozen,flaming,stinky] {
 		familiar questFam = to_familiar(string + " gravy fairy");
 		if (have_familiar(questFam)) {
 			use_familiar(questFam);
@@ -137,7 +137,7 @@ void clearBarrow() {
 	smallLeatherGlove();
 	set_property("choiceAdventure5",1);
 	maximize("-combat +equip spooky glove -tie", false);
-	while ((get_property("questM03Bugbear") != "finished")) {
+	while ((get_property("questM03Bugbear") != "step3")) {
 		combatModBuff("minus");
 		runAdv($location[spooky gravy barrow]);
 	}
