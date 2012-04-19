@@ -130,14 +130,14 @@ void clearBarrow() {
 	}
 	maximize("0.1 item -combat", false);
 	set_property("choiceAdventure5",2);
-	while(item_amount($item[inexplicably glowing rock]) == 0 && item_amount($item[spooky fairy gravy]) == 0) {
+	while(item_amount($item[inexplicably glowing rock]) == 0 || item_amount($item[spooky fairy gravy]) == 0) {
 		combatModBuff("minus");
 		runAdv($location[spooky gravy barrow]);
 	}
 	smallLeatherGlove();
 	set_property("choiceAdventure5",1);
 	maximize("-combat +equip spooky glove -tie", false);
-	while ((get_property("questM03Bugbear") != "step3")) {
+	while (last_monster() != $monster[felonia]) {
 		combatModBuff("minus");
 		runAdv($location[spooky gravy barrow]);
 	}
