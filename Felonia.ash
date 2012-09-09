@@ -14,6 +14,8 @@ string feloniaVersion = "0.03";		// This is the script's version!
 // check_version("Felonia", "Felonia", feloniaVersion, Felonia_PAGE);
 
 //Various settings
+setvar("woleUseMall", true); //in case you haven't used it
+
 boolean useMall = vars["woleUseMall"].to_boolean();
 string zapruder = "knoll.php?place=mayor";
 string zapruderShroom;
@@ -99,9 +101,9 @@ void smallLeatherGlove() {
 //This acquires a mushroom and hands it in
 void getAMushroom(string page) {
 	print("Getting a mushroom and giving it to the mayor", "blue");
-	foreach string in $strings[frozen,flaming,stinky] {
-		if (contains_text(page, string)) {
-			zapruderShroom = string;
+	foreach shroom in $strings[frozen,flaming,stinky] {
+		if (contains_text(page, shroom)) {
+			zapruderShroom = shroom;
 		}
 	}
 	item questShroom = to_item(zapruderShroom +" mushroom");
@@ -110,7 +112,7 @@ void getAMushroom(string page) {
 		buy(1, questShroom);
 	}
 	if (!useMall && item_amount(questShroom) == 0) {
-		print("You need to grow a " + to_string(questShroom) + "to continue!");
+		print("You need to grow a " + to_string(questShroom) + " to continue!");
 		abort();
 	}
 	if (contains_text(visit_url(zapruder),to_string(questHatchling))) { 
@@ -121,8 +123,8 @@ void getAMushroom(string page) {
 //This clears the barrow
 void clearBarrow() {
 	print("Starting the Spooky gravy barrow","blue");
-	foreach string in $strings[spooky, sleazy,frozen,flaming,stinky] {
-		familiar questFam = to_familiar(string + " gravy fairy");
+	foreach shroom in $strings[spooky, sleazy,frozen,flaming,stinky] {
+		familiar questFam = to_familiar(shroom + " gravy fairy");
 		if (have_familiar(questFam)) {
 			use_familiar(questFam);
 			break;
